@@ -14,7 +14,7 @@ function load(results) {
 	random_num = results.instance.exports.random_num;
 }
 
-WebAssembly.instantiateStreaming(fetch("Javascript/random.wasm")).then(load);
+WebAssembly.instantiateStreaming(fetch("assets/Javascript/random.wasm")).then(load);
 
 function get_num(items) {
 	return random_num(new Date().getTime(), items);
