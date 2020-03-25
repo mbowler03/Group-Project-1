@@ -11,7 +11,7 @@ panel {
     padding-bottom: 2%;
     border-style: ridge;
     border-color: #eeeecc;
-    text-shadow: 1px 1px 0 black, 
+    text-shadow: 1px 1px 0 black,
                  2px 2px 0 black;
 }
 
@@ -32,8 +32,12 @@ body {
     color: #eeeecc;
 	padding-top: 1%;
     padding-bottom: 2%;
-    text-shadow: 1px 1px 0 black, 
+    text-shadow: 1px 1px 0 black,
                  2px 2px 0 black;
+}
+
+#result {
+  font-family: Hack, monospace;
 }
 
 #RNG {
@@ -48,12 +52,12 @@ body {
     animation-name: spin;
     animation-duration: 11000ms;
     animation-iteration-count: infinite;
-    animation-timing-function: linear; 
+    animation-timing-function: linear;
     /* transform: rotate(3deg); */
      /* transform: rotate(0.3rad);/ */
-     /* transform: rotate(3grad); */ 
+     /* transform: rotate(3grad); */
      /* transform: rotate(.03turn);  */
-     text-shadow: 1px 1px 0 black, 
+     text-shadow: 1px 1px 0 black,
                   2px 2px 0 black;
 }
 
@@ -61,7 +65,7 @@ body {
     opacity: 0.5;
     transition: opacity .8s;
 }
-  
+
 @keyframes spin {
     from {
         transform:rotate(0deg);
@@ -75,7 +79,7 @@ body {
     font-family: Clip;
     src: url("https://acupoftee.github.io/fonts/Clip.ttf");
   }
-  
+
   body {
     background-color: #141114;
     background-image: linear-gradient(335deg, black 23px, transparent 23px),
@@ -85,7 +89,7 @@ body {
     background-size: 58px 58px;
     background-position: 0px 2px, 4px 35px, 29px 31px, 34px 6px;
   }
-  
+
   .sign {
     position: absolute;
     display: flex;
@@ -111,7 +115,7 @@ body {
       0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
     animation: shine 2s forwards, flicker 3s infinite;
   }
-  
+
   @keyframes blink {
     0%,
     22%,
@@ -133,15 +137,15 @@ body {
       text-shadow: none;
     }
   }
-  
+
   .flicker {
     animation: shine 2s forwards, blink 3s 2s infinite;
   }
-  
+
   .fast-flicker {
     animation: shine 2s forwards, blink 10s 1s infinite;
   }
-  
+
   @keyframes shine {
     0% {
       color: #6b1839;
@@ -154,130 +158,129 @@ body {
         0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
     }
   }
-  
+
   @keyframes flicker {
     from {
       opacity: 1;
     }
-  
+
     4% {
       opacity: 0.9;
     }
-  
+
     6% {
       opacity: 0.85;
     }
-  
+
     8% {
       opacity: 0.95;
     }
-  
+
     10% {
       opacity: 0.9;
     }
-  
+
     11% {
       opacity: 0.922;
     }
-  
+
     12% {
       opacity: 0.9;
     }
-  
+
     14% {
       opacity: 0.95;
     }
-  
+
     16% {
       opacity: 0.98;
     }
-  
+
     17% {
       opacity: 0.9;
     }
-  
+
     19% {
       opacity: 0.93;
     }
-  
+
     20% {
       opacity: 0.99;
     }
-  
+
     24% {
       opacity: 1;
     }
-  
+
     26% {
       opacity: 0.94;
     }
-  
+
     28% {
       opacity: 0.98;
     }
-  
+
     37% {
       opacity: 0.93;
     }
-  
+
     38% {
       opacity: 0.5;
     }
-  
+
     39% {
       opacity: 0.96;
     }
-  
+
     42% {
       opacity: 1;
     }
-  
+
     44% {
       opacity: 0.97;
     }
-  
+
     46% {
       opacity: 0.94;
     }
-  
+
     56% {
       opacity: 0.9;
     }
-  
+
     58% {
       opacity: 0.9;
     }
-  
+
     60% {
       opacity: 0.99;
     }
-  
+
     68% {
       opacity: 1;
     }
-  
+
     70% {
       opacity: 0.9;
     }
-  
+
     72% {
       opacity: 0.95;
     }
-  
+
     93% {
       opacity: 0.93;
     }
-  
+
     95% {
       opacity: 0.95;
     }
-  
+
     97% {
       opacity: 0.93;
     }
-  
+
     to {
       opacity: 1;
     }
   }
-  
