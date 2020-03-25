@@ -7,8 +7,9 @@ var apis = [
 "http://www.omdbapi.com/?apikey=b7efccee&type=series&s='the'&page=",
 "http://www.omdbapi.com/?apikey=b7efccee&type=series&s='star'&page=",
 ];
-var api_num;
-var random_num;
+var api_num = -1;
+var random_num = function(seed, num){}
+var interval;
 
 function load(results) {
 	random_num = results.instance.exports.random_num;
@@ -21,19 +22,17 @@ function get_num(items) {
 }
 
 function print_api(response) {
-	var data;
+	var data = get_type(api_num) + ": ";
 	switch (api_num) {
 	case 0:
-		data = "Book: " + response.results[get_num(20)].title;
+		data += response.results[get_num(20)].title;
 		break;
 
 	case 1:
 	case 2:
-		data = "Movie: " + response.Search[get_num(10)].Title;
-		break;
 	case 3:
 	case 4:
-		data = "TV Show: " + response.Search[get_num(10)].Title;
+		data += response.Search[get_num(10)].Title;
 		break;
 
 	default:
@@ -44,7 +43,7 @@ function print_api(response) {
 }
 
 function call_api(url) {
-	$("#result").text("PLEASE WAIT");
+	$("#result").text(get_type(api_num) + ": PLEASE WAIT");
 
 	switch (api_num) {
 	case 0:
@@ -68,9 +67,42 @@ function call_api(url) {
 	$.ajax(api).then(print_api);
 }
 
+function get_type(num) {
+	var type = "";
+	switch(num) {
+	case 0:
+		type = "BOOK";
+		break;
+
+	case 1:
+	case 2:
+		type = "FILM";
+		break;
+
+	case 3:
+	case 4:
+		type = "SHOW";
+		break;
+
+	default:
+	}
+
+	return type;
+}
+
+function slots() {
+	$("#result").text(get_type(get_num(5)));
+}
+
+function start_slots() {
+	interval = setInterval(slots, 10);
+	setTimeout(get_api, 2000);
+}
+
 function get_api() {
+	clearInterval(interval);
 	api_num = get_num(5);
 	call_api(apis[api_num]);
 }
 
-$("#RNG").click(get_api);
+$("#RNG").click(start_slots);
