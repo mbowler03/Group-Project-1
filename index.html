@@ -15,6 +15,10 @@
 
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+
+<!-- Media Query -->
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
 </head>
 
 <body>
@@ -29,28 +33,31 @@
     <div class="sign">
       <span class="flicker">D</span>ur<span class="flicker">in</span>g&nbsp;a&nbsp;<span class="fast-flicker">P</span>and<span class="flicker">em</span>ic
     </div>
+    
+  </div>
 
-    <!--<div class="jumbotron">
-      <h1 class="text-center">1000 Things To Do</h1>
-      <h1 class="text-center">During a Pandemic</h1>
-      <h6 class="text-center">the random entertainment generator</h6>
-    </div>-->
 
+    <!-- Button -->
+  <div class="container">
     <div class="sign">
-      <button id="RNG" class="btn btn-primary">CLICK HERE</button>
+      <button id="RNG" class="btn btn-primary">WHAT TO DO?<h6>CLICK HERE</h6></button>
 	    <div id="random-number"></div>
-
     </div>
   </div>
 
-  <div class="card mb-4">
-    <div class="card-header">YOUR RESULTS</div>
-    <div id="result" class="card-body"></div>
-  </div>
+  <!-- Results Section -->
+    <div class="container">
+      <div class="card mb-4">
+        <div class="card-header">YOUR RESULTS</div>
+        <div id="result" class="card-body"></div>
+      </div>
+    </div>
 
-  <div id="image-result" class="text-center">
-    <img src="#" alt="image">
-  </div>
+    <div class="container">
+      <div id="image-result" class="text-center>
+      </div>
+    </div>
+
 
   <!-- JavaScript -->
   <script src="assets/Javascript/project1.js"></script>
