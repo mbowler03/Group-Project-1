@@ -2,10 +2,6 @@ panel {
 	width: 100%;
 }
 
-img {
-  width: 100%;
-}
-
 /*
 .jumbotron {
   background-color: #ff0077;
@@ -61,7 +57,7 @@ img {
   /* transform: rotate(.03turn);  */
   text-shadow: 1px 1px 0 black,
                2px 2px 0 black;
-} 
+}
 
 /* CLICK HERE Button */
 #RNG:hover {

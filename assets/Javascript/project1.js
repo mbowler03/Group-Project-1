@@ -6,6 +6,7 @@ var apis = [
 "https://www.omdbapi.com/?apikey=b7efccee&type=movie&s='star'&page=",
 "https://www.omdbapi.com/?apikey=b7efccee&type=series&s='the'&page=",
 "https://www.omdbapi.com/?apikey=b7efccee&type=series&s='star'&page=",
+"https://bgg-json.azurewebsites.net/hot",
 ];
 var api_num = -1;
 var random_num = function(num){}
@@ -35,6 +36,10 @@ function get_type(num) {
 		type = "SHOW";
 		break;
 
+	case 5:
+		type = "GAME";
+		break;
+
 	default:
 	}
 
@@ -52,29 +57,36 @@ function print_api(response) {
 	case 2:
 	case 3:
 	case 4:
-		data += response.Search[random_num(10)].Title;
+		var result = response.Search[random_num(10)];
+		data += result.Title;
+		var image = $("<img>").attr("src", result.Poster);
+		$("#image-result").append(image);
+		break;
+
+	case 5:
+		var result = JSON.parse(response)[random_num(50)];
+		data += result.name;
+		var image = $("<img>").attr("src", result.thumbnail);
+		$("#image-result").append(image);
 		break;
 
 	default:
-		data = response;
 	}
 
 	$("#result").text(data);
 }
 
 function call_api(url) {
-	$("#result").text(get_type(api_num) + ": PLEASE WAIT");
-
 	switch (api_num) {
 	case 0:
-		url += random_num(10) * 20;
+		url += random_num(5) * 20;
 		break;
 
 	case 1:
 	case 2:
 	case 3:
 	case 4:
-		url += random_num(10) + 1;
+		url += random_num(15) + 1;
 		break;
 
 	default:
@@ -82,22 +94,28 @@ function call_api(url) {
 
 	$.ajax({
 		url: url,
-		method: "GET"
+		method: "GET",
 	}).then(print_api);
 }
 
 function slots() {
-	$("#result").text(get_type(random_num(5)));
+	$("#result").text(get_type(random_num(apis.length)));
+}
+
+function wait() {
+	clearInterval(animate);
+	api_num = random_num(apis.length);
+	$("#result").text(get_type(api_num) + ": LOADING");
+	setTimeout(get_api, 1000);
 }
 
 function start_slots() {
-	animate = setInterval(slots, 10);
-	setTimeout(get_api, 2000);
+	$("#image-result").empty();
+	animate = setInterval(slots, 50);
+	setTimeout(wait, 2000);
 }
 
 function get_api() {
-	clearInterval(animate);
-	api_num = random_num(5);
 	call_api(apis[api_num]);
 }
 
