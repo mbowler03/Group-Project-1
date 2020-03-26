@@ -2,14 +2,13 @@ panel {
 	width: 100%;
 }
 
+
 #image-result {
-  width: 100%;
   padding: 10px;
   position: relative;
 }
 
 /* Results Section */
-
 .card-header {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   background-color: #ff0077;
@@ -43,7 +42,7 @@ panel {
   /* transform: rotate(.03turn);  */
   text-shadow: 1px 1px 0 black,
                2px 2px 0 black;
-} 
+}
 
 #RNG:hover {
   opacity: 0.5;
