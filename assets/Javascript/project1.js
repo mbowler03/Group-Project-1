@@ -86,7 +86,7 @@ function print_api(response) {
 
 	$("#result").text(data);
 	var save = $("<button>").attr("id", "save").text("SAVE");
-	save.addClass("position-absolute");
+	save.addClass("position-absolute rounded");
 	$("#result").append(save);
 	loading = false;
 }
@@ -125,13 +125,12 @@ function wait() {
 }
 
 function start_slots() {
-	if (loading) {
-		return;
+	if (!loading) {
+		loading = true;
+		$("#image-result").empty();
+		animate = setInterval(slots, 50);
+		setTimeout(wait, 2000);
 	}
-	loading = true;
-	$("#image-result").empty();
-	animate = setInterval(slots, 50);
-	setTimeout(wait, 2000);
 }
 
 function get_api() {
@@ -144,18 +143,20 @@ function print_items() {
 	if (items === null) {
 		items = [];
 	}
-
 	$("#item-list").empty();
-for (var i = 0; i < items.length; i++) {
+
+	for (var i = 0; i < items.length; i++) {
 		var row = $("<tr>");
-		console.log(items[i].type);
 		row.append($("<td>").text(items[i].type));
 		row.append($("<td>").text(items[i].item));
 		var img = $("<img>").attr("src", items[i].image);
 		img.addClass("item-image");
-		row.append($("<td>").append(img));
+		var btn = $("<button>").text("X").attr("value", i);
+		btn.addClass("delete rounded");
+		row.append($("<td>").append(img, btn));
 		$("#item-list").append(row);
 	}
+	localStorage.setItem("items", JSON.stringify(items));
 }
 
 function save_item() {
@@ -170,6 +171,12 @@ function save_item() {
 	print_items();
 }
 
+function delete_item() {
+	items.splice(parseInt($(this).attr("value")), 1);
+	print_items();
+}
+
 $(document).on("click", "#save", save_item);
+$(document).on("click", ".delete", delete_item);
 items = JSON.parse(localStorage.getItem("items"));
 print_items();
