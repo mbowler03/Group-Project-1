@@ -9,12 +9,17 @@ var apis = [
 "https://bgg-json.azurewebsites.net/hot",
 ];
 var api_num = -1;
+var item = "";
+var image = "";
+var items = [];
 var random_num = function(num){}
 var animate;
+var loading = true;
 
 function load(results) {
 	results.instance.exports.setup_rng(new Date().getTime());
 	random_num = results.instance.exports.random_num;
+	loading = false;
 }
 
 WebAssembly.instantiateStreaming(fetch("assets/Javascript/random.wasm")).then(load);
@@ -50,7 +55,9 @@ function print_api(response) {
 	var data = get_type(api_num) + ": ";
 	switch (api_num) {
 	case 0:
-		data += response.results[random_num(20)].title;
+		item = response.results[random_num(20)].title;
+		data += item;
+		image = "#";
 		break;
 
 	case 1:
@@ -58,22 +65,30 @@ function print_api(response) {
 	case 3:
 	case 4:
 		var result = response.Search[random_num(10)];
-		data += result.Title;
-		var image = $("<img>").attr("src", result.Poster);
-		$("#image-result").append(image);
+		item = result.Title;
+		data += item;
+		image = result.Poster;
+		img = $("<img>").attr("src", image);
+		$("#image-result").append(img);
 		break;
 
 	case 5:
 		var result = JSON.parse(response)[random_num(50)];
-		data += result.name;
-		var image = $("<img>").attr("src", result.thumbnail);
-		$("#image-result").append(image);
+		item = result.name;
+		data += item;
+		image = result.thumbnail;
+		img = $("<img>").attr("src", image);
+		$("#image-result").append(img);
 		break;
 
 	default:
 	}
 
 	$("#result").text(data);
+	var save = $("<button>").attr("id", "save").text("SAVE");
+	save.addClass("position-absolute rounded");
+	$("#result").append(save);
+	loading = false;
 }
 
 function call_api(url) {
@@ -110,9 +125,12 @@ function wait() {
 }
 
 function start_slots() {
-	$("#image-result").empty();
-	animate = setInterval(slots, 50);
-	setTimeout(wait, 2000);
+	if (!loading) {
+		loading = true;
+		$("#image-result").empty();
+		animate = setInterval(slots, 50);
+		setTimeout(wait, 2000);
+	}
 }
 
 function get_api() {
@@ -120,3 +138,45 @@ function get_api() {
 }
 
 $("#RNG").click(start_slots);
+
+function print_items() {
+	if (items === null) {
+		items = [];
+	}
+	$("#item-list").empty();
+
+	for (var i = 0; i < items.length; i++) {
+		var row = $("<tr>");
+		row.append($("<td>").text(items[i].type));
+		row.append($("<td>").text(items[i].item));
+		var img = $("<img>").attr("src", items[i].image);
+		img.addClass("item-image");
+		var btn = $("<button>").text("X").attr("value", i);
+		btn.addClass("delete rounded");
+		row.append($("<td>").append(img, btn));
+		$("#item-list").append(row);
+	}
+	localStorage.setItem("items", JSON.stringify(items));
+}
+
+function save_item() {
+	var item_obj = {
+		type: get_type(api_num),
+		item: item,
+		image: image,
+	};
+	items.push(item_obj);
+	localStorage.clear();
+	localStorage.setItem("items", JSON.stringify(items));
+	print_items();
+}
+
+function delete_item() {
+	items.splice(parseInt($(this).attr("value")), 1);
+	print_items();
+}
+
+$(document).on("click", "#save", save_item);
+$(document).on("click", ".delete", delete_item);
+items = JSON.parse(localStorage.getItem("items"));
+print_items();
