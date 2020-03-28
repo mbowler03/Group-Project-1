@@ -2,7 +2,6 @@ panel {
 	width: 100%;
 }
 
-
 #image-result {
   padding: 10px;
   position: relative;
@@ -32,16 +31,7 @@ panel {
   font-weight: bolder;
   font-size: 35%;
   background-color: #ff0077;
-  animation-name: rotate;
-  animation-duration: 11000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  /* transform: rotate(3deg); */
-  /* transform: rotate(0.3rad);/ */
-  /* transform: rotate(3grad); */
-  /* transform: rotate(.03turn);  */
-  text-shadow: 1px 1px 0 black,
-               2px 2px 0 black;
+  text-shadow: 1px 1px 0 black, 2px 2px 0 black;
 }
 
 #RNG:hover {
@@ -50,16 +40,12 @@ panel {
 }
 
 #save, .delete {
-	bottom: 12px;
-	right: 10px;
 	color: #eeeecc;
 	font-family: Hack, monospace;
 	font-size: 24px;
-	border-style: solid;
-	border-color: rgb(255, 255, 255);
 	background-color: #ff0077;
-	text-shadow: 1px 1px 0 black,
-		     2px 2px 0 black;
+	text-shadow: 1px 1px 0 black, 2px 2px 0 black;
+	border: 0;
 }
 
 #save:hover, .delete {
@@ -131,6 +117,20 @@ body {
       -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd,
       0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
   animation: shine 2s forwards, flicker 3s infinite;
+}
+
+#RNG-div {
+  background-image: radial-gradient(ellipse 50% 35% at 50% 50%, #6b1839, transparent);
+  letter-spacing: 2;
+  font-family: "Clip";
+  text-transform: uppercase;
+  font-size: 4em;
+  color: #ffe6ff;
+  text-shadow: 0 0 0.6rem #ffe6ff, 0 0 1.5rem #ff65bd,
+      -0.2rem 0.1rem 1rem #ff65bd, 0.2rem 0.1rem 1rem #ff65bd,
+      0 -0.5rem 2rem #ff2483, 0 0.5rem 3rem #ff2483;
+  animation: shine 2s forwards, flicker 3s infinite;
+  margin-bottom: 50px;
 }
 
 @keyframes blink {

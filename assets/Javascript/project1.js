@@ -12,14 +12,16 @@ var api_num = -1;
 var item = "";
 var image = "";
 var items = [];
-var random_num = function(num){}
 var animate;
-var loading = true;
+var loading = false;
+
+var random_num = function(num) {
+	return Math.floor(Math.random() * num);
+}
 
 function load(results) {
 	results.instance.exports.setup_rng(new Date().getTime());
 	random_num = results.instance.exports.random_num;
-	loading = false;
 }
 
 WebAssembly.instantiateStreaming(fetch("assets/Javascript/random.wasm")).then(load);
@@ -88,7 +90,7 @@ function print_api(response) {
 
 	$("#result").text(data);
 	var save = $("<button>").attr("id", "save").text("SAVE");
-	save.addClass("position-absolute rounded");
+	save.addClass("float-right rounded");
 	$("#result").append(save);
 	loading = false;
 }
