@@ -75,6 +75,7 @@ panel {
 
 .item-image {
 	height: 50px;
+	max-width: 50px;
 }
 
 #end {

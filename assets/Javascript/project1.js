@@ -68,8 +68,10 @@ function print_api(response) {
 		item = result.Title;
 		data += item;
 		image = result.Poster;
-		img = $("<img>").attr("src", image);
-		$("#image-result").append(img);
+		if (image !== "N/A") {
+			img = $("<img>").attr("src", image);
+			$("#image-result").append(img);
+		}
 		break;
 
 	case 5:
@@ -94,14 +96,14 @@ function print_api(response) {
 function call_api(url) {
 	switch (api_num) {
 	case 0:
-		url += random_num(5) * 20;
+		url += random_num(10) * 20;
 		break;
 
 	case 1:
 	case 2:
 	case 3:
 	case 4:
-		url += random_num(15) + 1;
+		url += random_num(20) + 1;
 		break;
 
 	default:
@@ -149,11 +151,15 @@ function print_items() {
 		var row = $("<tr>");
 		row.append($("<td>").text(items[i].type));
 		row.append($("<td>").text(items[i].item));
-		var img = $("<img>").attr("src", items[i].image);
-		img.addClass("item-image");
+		var end = $("<td>");
+		if (items[i].image !== "N/A" && items[i].image !== "#") {
+			var img = $("<img>").attr("src", items[i].image);
+			img.addClass("item-image");
+			end.append(img);
+		}
 		var btn = $("<button>").text("X").attr("value", i);
 		btn.addClass("delete rounded");
-		row.append($("<td>").append(img, btn));
+		row.append(end.append(btn));
 		$("#item-list").append(row);
 	}
 	localStorage.setItem("items", JSON.stringify(items));
