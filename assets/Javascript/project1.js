@@ -15,9 +15,7 @@ var items = [];
 var animate;
 var loading = false;
 
-var random_num = function(num) {
-	return Math.floor(Math.random() * num);
-}
+var random_num = function(num) {}
 
 function load(results) {
 	results.instance.exports.setup_rng(new Date().getTime());
